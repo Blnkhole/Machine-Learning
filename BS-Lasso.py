@@ -101,11 +101,9 @@ df.to_csv("predict_movies_ridge_r.csv", encoding = "utf-8")
 
 print("\n📊 Evaluating model...")
 
-# Tạo ma trận rating thật (pivot)
 rating_true = ratings.pivot(index="UserID", columns="MovieID", values="Rating")
 rating_true = rating_true.reindex(index=users["UserID"], columns=movies["MovieID"])
 
-# Ghép MovieID ↔ Title cho thống nhất
 pred_df = pd.DataFrame(
     R_pred,
     index=users["UserID"],
@@ -124,9 +122,8 @@ print(f"MSE  = {mse:.4f}")
 print(f"RMSE = {rmse:.4f}")
 print(f"MAE  = {mae:.4f}")
 
-# ==========================
-# 7️⃣ Precision@K, Recall@K, F1@K
-# ==========================
+# Precision@K, Recall@K, F1@K
+
 def precision_recall_at_k(pred, true, k=10, threshold=4.0):
     precisions, recalls = [], []
 
